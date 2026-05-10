@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "birthday-riya.vercel.app"
+        }
+      ],
+      "destination": "/riya-birthday-2026/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "mothers-day-wish.vercel.app"
+        }
+      ],
+      "destination": "/mothers-day-2026/:path*"
+    }
+  ]
+}
