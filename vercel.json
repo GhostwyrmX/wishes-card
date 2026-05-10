@@ -5,7 +5,7 @@
       "has": [
         {
           "type": "host",
-          "value": "riya-birthday-2026.vercel.app"
+          "value": "birthday-riya.vercel.app"
         }
       ],
       "destination": "/riya-birthday-2026/:path*"
@@ -19,16 +19,6 @@
         }
       ],
       "destination": "/mothers-day-2026/:path*"
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "your-custom-domain-1.com"
-        }
-      ],
-      "destination": "/riya-birthday-2026/:path*"
     },
     {
       "source": "/:path*",
