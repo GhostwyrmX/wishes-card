@@ -1,0 +1,44 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "riya-birthday-2026.vercel.app"
+        }
+      ],
+      "destination": "/riya-birthday-2026/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "mothers-day-2026.vercel.app"
+        }
+      ],
+      "destination": "/mothers-day-2026/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "your-custom-domain-1.com"
+        }
+      ],
+      "destination": "/riya-birthday-2026/:path*"
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "your-custom-domain-2.com"
+        }
+      ],
+      "destination": "/mothers-day-2026/:path*"
+    }
+  ]
+}

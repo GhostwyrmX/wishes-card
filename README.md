@@ -6,19 +6,21 @@ A collection of premium, responsive celebration cards for 2026.
 
 ### 1. Riya Birthday 2026
 A luxury birthday card with floating petals and confetti effects.
-- **Location**: `Riya Birthday 2026/index.html`
+- **Location**: `riya-birthday-2026/index.html`
 
 ### 2. Mother's Day 2026
 An elegant, botanical-themed Mother's Day card with responsive layouts and subtle animations.
-- **Location**: `mothers day 2026/index.html`
+- **Location**: `mothers-day-2026/index.html`
 
 ## Deployment
 
-### Vercel (Monorepo Setup)
-To deploy these as separate sites or paths on Vercel:
-1.  Push this repository to GitHub.
-2.  Import the project in Vercel.
-3.  Vercel will detect the subdirectories. You can deploy them individually or as a single project where they are accessible at `/Riya Birthday 2026/` and `/mothers day 2026/`.
+### Vercel (Multi-Domain Setup)
+This project is configured to use different domains for each card using `vercel.json`.
+
+1.  **Push** this repository to GitHub.
+2.  **Import** the project in Vercel.
+3.  **Add Domains**: Go to Settings > Domains and add all your custom domains to this single project.
+4.  **Configure `vercel.json`**: Update the `host` values in `vercel.json` to match your actual domains.
 
 ### Manual GitHub Pages
 1.  Go to Repository Settings > Pages.
