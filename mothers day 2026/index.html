@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day 🌿</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --sage:    #7a8c6e;
+  --moss:    #4a5c3f;
+  --earth:   #3a2d28;
+  --linen:   #f5f0e8;
+  --parch:   #ede5d4;
+  --blush:   #e8c4a8;
+  --terr:    #c4714a;
+  --sky:     #d4e0d0;
+  --ivory:   #faf7f2;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ivory);
+  color: var(--earth);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+.cur { position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform .08s; }
+#c1 { width:8px; height:8px; background:var(--terr); border-radius:50%; }
+#c2 { width:28px; height:28px; border:1px solid var(--sage); border-radius:50%; opacity:.6; transition:left .15s ease,top .15s ease; }
+
+/* ── NOISE TEXTURE overlay ── */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.025;
+  pointer-events:none;
+  z-index:1000;
+}
+
+/* ── CANVAS ── */
+#canvas { position:fixed; inset:0; pointer-events:none; z-index:500; }
+
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--linen);
+}
+
+.hero-blob {
+  position:absolute;
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  pointer-events:none;
+}
+.blob1 {
+  width: 70vw; height: 70vw;
+  background: radial-gradient(circle at 40% 40%, #d6e4cf, #c9d9bf00);
+  top: -15vw; right: -15vw;
+  animation: morphBlob 18s ease-in-out infinite alternate;
+}
+.blob2 {
+  width: 55vw; height: 55vw;
+  background: radial-gradient(circle at 60% 60%, #e8c4a820, transparent);
+  bottom: -10vw; left: -10vw;
+  animation: morphBlob 22s ease-in-out infinite alternate-reverse;
+}
+@keyframes morphBlob {
+  0%   { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; }
+  33%  { border-radius: 45% 55% 40% 60% / 60% 40% 55% 45%; }
+  66%  { border-radius: 55% 45% 60% 40% / 45% 55% 50% 50%; }
+  100% { border-radius: 40% 60% 45% 55% / 55% 45% 60% 40%; }
+}
+
+/* botanical SVG leaves */
+.leaf-svg {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.12;
+}
+.leaf1 { top: 5%; left: 3%; width: 200px; transform: rotate(-20deg); animation: sway 8s ease-in-out infinite; }
+.leaf2 { top: 10%; right: 5%; width: 160px; transform: rotate(30deg) scaleX(-1); animation: sway 11s ease-in-out infinite reverse; }
+.leaf3 { bottom: 15%; left: 6%; width: 130px; transform: rotate(15deg); animation: sway 9s ease-in-out infinite 2s; }
+.leaf4 { bottom: 8%; right: 4%; width: 180px; transform: rotate(-35deg) scaleX(-1); animation: sway 12s ease-in-out infinite 1s reverse; }
+@keyframes sway {
+  0%,100% { transform: rotate(-20deg) scale(1); }
+  50%      { transform: rotate(-15deg) scale(1.03); }
+}
+
+.hero-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--sage);
+  font-weight: 400;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp .7s .4s forwards;
+}
+
+.hero-date {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(80px, 16vw, 160px);
+  font-weight: 700;
+  line-height: .9;
+  color: var(--moss);
+  opacity: .08;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -.03em;
+  animation: fadeIn 1.5s .2s both;
+}
+
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(48px, 10vw, 110px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--earth);
+  opacity: 0;
+  animation: fadeUp .9s .6s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--terr);
+  display: block;
+}
+
+.hero-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--sage);
+  margin-top: 20px;
+  letter-spacing: .01em;
+  opacity: 0;
+  animation: fadeUp .9s .9s forwards;
+}
+
+.flower-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 36px;
+  opacity: 0;
+  animation: fadeUp .9s 1.1s forwards;
+}
+.flower-row span { font-size: 22px; animation: floatF 3s ease-in-out infinite; }
+.flower-row span:nth-child(2) { animation-delay: .4s; }
+.flower-row span:nth-child(3) { animation-delay: .8s; font-size: 28px; }
+.flower-row span:nth-child(4) { animation-delay: .4s; }
+.flower-row span:nth-child(5) { animation-delay: 0s; }
+@keyframes floatF {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.scroll-ind {
+  position: relative;
+  z-index:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 36px;
+  opacity: 0;
+  animation: fadeIn 1s 2.2s forwards;
+}
+.scroll-ind span { font-size:9px; letter-spacing:.25em; text-transform:uppercase; color:var(--sage); opacity:.7; }
+.scroll-track { width:1px; height:44px; background: linear-gradient(to bottom, var(--sage), transparent); }
+
+/* ════════════════════════════
+   QUOTE BAND
+════════════════════════════ */
+.quote-band {
+  background: var(--moss);
+  color: var(--linen);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quote-band::before {
+  content: '"';
+  font-family: 'Fraunces', serif;
+  font-size: 280px;
+  position: absolute;
+  top: -60px; left: 20px;
+  color: rgba(255,255,255,.04);
+  line-height: 1;
+  pointer-events:none;
+}
+.quote-text {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(22px, 4vw, 46px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 760px;
+  margin: 0 auto 24px;
+  color: var(--linen);
+  position: relative;
+  z-index:1;
+}
+.quote-text strong { font-weight:500; color: var(--blush); font-style:normal; }
+.quote-attr {
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--sage);
+  opacity: .8;
+  position: relative;
+  z-index:1;
+}
+
+/* ════════════════════════════
+   THINGS section
+════════════════════════════ */
+.things-section {
+  padding: 110px 24px;
+  background: var(--ivory);
+}
+.things-inner { max-width: 960px; margin: 0 auto; }
+
+.sec-label {
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--terr);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.sec-label::after { content:''; flex:1; height:1px; background:linear-gradient(to right, var(--terr), transparent); opacity:.4; }
+
+.sec-heading {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--earth);
+  max-width: 580px;
+  margin-bottom: 64px;
+}
+.sec-heading em { font-style: italic; color: var(--sage); }
+
+.things-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+@media(max-width:700px) { .things-grid { grid-template-columns: 1fr; } }
+
+.thing {
+  background: var(--parch);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.thing:hover { background: var(--sky); }
+.thing::after {
+  content: attr(data-num);
+  position: absolute;
+  bottom: -10px; right: 10px;
+  font-family: 'Fraunces', serif;
+  font-size: 80px;
+  font-weight: 700;
+  color: rgba(58,45,40,.05);
+  line-height: 1;
+  pointer-events:none;
+}
+.thing-icon { font-size:30px; margin-bottom:18px; display:block; }
+.thing-title {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--earth);
+  margin-bottom: 10px;
+}
+.thing-desc {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #6b5c52;
+}
+
+/* ════════════════════════════
+   LETTER section
+════════════════════════════ */
+.letter-section {
+  background: var(--parch);
+  padding: 110px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.letter-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--terr), var(--sage), var(--blush));
+}
+
+.letter-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.letter-paper {
+  background: var(--ivory);
+  border-radius: 4px;
+  padding: 56px 56px 48px;
+  box-shadow: 0 4px 40px rgba(58,45,40,.08), 0 1px 2px rgba(58,45,40,.04);
+  position: relative;
+}
+@media(max-width:600px) { .letter-paper { padding: 36px 28px; } }
+
+.letter-paper::before {
+  content:'';
+  position:absolute;
+  left:72px; top:0; bottom:0;
+  width:1px;
+  background: rgba(196,113,74,.15);
+}
+@media(max-width:600px) { .letter-paper::before { left:48px; } }
+
+.letter-lines {
+  position:absolute;
+  inset:0;
+  background: repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(122,140,110,.06) 32px);
+  border-radius:4px;
+  pointer-events:none;
+}
+
+.letter-date {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--sage);
+  text-align: right;
+  margin-bottom: 32px;
+  position: relative;
+}
+.letter-dear {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  color: var(--terr);
+  margin-bottom: 20px;
+  position: relative;
+}
+.letter-body {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(15px, 2vw, 17px);
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--earth);
+  position: relative;
+}
+.letter-body em { font-style:italic; color:var(--terr); }
+.letter-sign {
+  margin-top: 36px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--earth);
+  position: relative;
+}
+
+/* ════════════════════════════
+   WISHES TIMELINE
+════════════════════════════ */
+.wishes-section {
+  padding: 110px 24px;
+  background: var(--ivory);
+}
+.wishes-inner { max-width: 760px; margin: 0 auto; }
+
+.timeline {
+  position: relative;
+  margin-top: 60px;
+  padding-left: 48px;
+}
+.timeline::before {
+  content:'';
+  position:absolute;
+  left:10px; top:0; bottom:0;
+  width:1px;
+  background: linear-gradient(to bottom, var(--sage), transparent);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 52px;
+  opacity:0;
+  transform: translateX(-16px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.tl-item.visible { opacity:1; transform:translateX(0); }
+
+.tl-dot {
+  position:absolute;
+  left: -42px;
+  top: 4px;
+  width:10px; height:10px;
+  border-radius:50%;
+  background: var(--terr);
+  border: 3px solid var(--ivory);
+  box-shadow: 0 0 0 1px var(--terr);
+}
+.tl-wish-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--earth);
+  margin-bottom: 8px;
+}
+.tl-wish-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #7a6a60;
+}
+
+/* ════════════════════════════
+   CLOSING
+════════════════════════════ */
+.closing {
+  background: var(--earth);
+  color: var(--linen);
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing-glow {
+  position:absolute;
+  inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(196,113,74,.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+.closing-pre {
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--blush);
+  opacity:.8;
+  margin-bottom:16px;
+}
+.closing-main {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(40px, 9vw, 96px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--linen);
+  margin-bottom: 16px;
+}
+.closing-main em { font-style:italic; color:var(--blush); }
+.closing-tagline {
+  font-size: 14px;
+  letter-spacing: .06em;
+  color: var(--sage);
+  margin-bottom: 56px;
+  opacity: .9;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 40px;
+  background: var(--terr);
+  color: var(--ivory);
+  font-family:'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background .3s, transform .2s, box-shadow .3s;
+}
+.btn:hover {
+  background: var(--moss);
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(74,92,63,.3);
+}
+
+.petals-wrap { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.fpetal {
+  position:absolute;
+  font-size:18px;
+  animation: risePetal linear infinite;
+  opacity:0;
+}
+@keyframes risePetal {
+  0%   { transform:translateY(50px) rotate(0deg); opacity:0; }
+  15%  { opacity:.7; }
+  85%  { opacity:.5; }
+  100% { transform:translateY(-80vh) rotate(540deg); opacity:0; }
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+
+.reveal {
+  opacity:0;
+  transform: translateY(28px);
+  transition: opacity .85s ease, transform .85s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+.reveal-stagger > * {
+  opacity:0;
+  transform:translateY(20px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:.05s; }
+.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.15s; }
+.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.25s; }
+.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.35s; }
+.reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:.45s; }
+.reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:.55s; }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<div class="cur" id="c1"></div>
+<div class="cur" id="c2"></div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+
+  <svg class="leaf-svg leaf1" viewBox="0 0 120 200" fill="none">
+    <path d="M60 200 C60 200 10 120 20 60 C30 0 60 10 60 10 C60 10 90 0 100 60 C110 120 60 200 60 200Z" fill="#4a5c3f"/>
+    <line x1="60" y1="200" x2="60" y2="10" stroke="#faf7f2" stroke-width="1.5" opacity=".4"/>
+    <line x1="60" y1="150" x2="35" y2="100" stroke="#faf7f2" stroke-width="1" opacity=".3"/>
+    <line x1="60" y1="120" x2="80" y2="80" stroke="#faf7f2" stroke-width="1" opacity=".3"/>
+  </svg>
+  <svg class="leaf-svg leaf2" viewBox="0 0 120 200" fill="none">
+    <path d="M60 200 C60 200 10 120 20 60 C30 0 60 10 60 10 C60 10 90 0 100 60 C110 120 60 200 60 200Z" fill="#7a8c6e"/>
+    <line x1="60" y1="200" x2="60" y2="10" stroke="#faf7f2" stroke-width="1.5" opacity=".4"/>
+  </svg>
+  <svg class="leaf-svg leaf3" viewBox="0 0 120 200" fill="none">
+    <path d="M60 200 C60 200 5 130 15 65 C25 0 60 8 60 8 C60 8 95 0 105 65 C115 130 60 200 60 200Z" fill="#c4714a"/>
+    <line x1="60" y1="200" x2="60" y2="8" stroke="#faf7f2" stroke-width="1.5" opacity=".3"/>
+  </svg>
+  <svg class="leaf-svg leaf4" viewBox="0 0 120 200" fill="none">
+    <path d="M60 200 C60 200 10 120 20 60 C30 0 60 10 60 10 C60 10 90 0 100 60 C110 120 60 200 60 200Z" fill="#4a5c3f"/>
+    <line x1="60" y1="200" x2="60" y2="10" stroke="#faf7f2" stroke-width="1.5" opacity=".4"/>
+  </svg>
+
+  <div class="hero-date">MAY 10</div>
+
+  <div class="hero-main">
+    <div class="eyebrow">✦ Mother's Day · May 10, 2026 ✦</div>
+    <h1 class="hero-title">
+      Happy<br>
+      <em>Mother's Day</em>
+    </h1>
+    <p class="hero-sub">To the woman who made home feel like the safest place on earth.</p>
+
+    <div class="flower-row">
+      <span>🌸</span>
+      <span>🌿</span>
+      <span>🌷</span>
+      <span>🌿</span>
+      <span>🌸</span>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <span>Scroll</span>
+    <div class="scroll-track"></div>
+  </div>
+</section>
+
+<!-- ══ QUOTE BAND ══ -->
+<div class="quote-band">
+  <p class="quote-text reveal">
+    "A mother is she who can take the place of all others,
+    but whose place <strong>no one else can take.</strong>"
+  </p>
+  <div class="quote-attr reveal">— Cardinal Mermillod</div>
+</div>
+
+<!-- ══ THINGS ══ -->
+<section class="things-section">
+  <div class="things-inner">
+    <div class="sec-label reveal">What you mean to us</div>
+    <h2 class="sec-heading reveal">The things only <em>a mother</em> knows how to do</h2>
+
+    <div class="things-grid reveal-stagger">
+      <div class="thing" data-num="01">
+        <span class="thing-icon">🤲</span>
+        <div class="thing-title">Unconditional Love</div>
+        <p class="thing-desc">No fine print. No conditions. Just a love that shows up even when it's hard to.</p>
+      </div>
+      <div class="thing" data-num="02">
+        <span class="thing-icon">🌙</span>
+        <div class="thing-title">Quiet Sacrifice</div>
+        <p class="thing-desc">All the things you gave up without ever making us feel the cost. We see it now.</p>
+      </div>
+      <div class="thing" data-num="03">
+        <span class="thing-icon">🫂</span>
+        <div class="thing-title">The Right Hug</div>
+        <p class="thing-desc">The kind that makes the whole world pause and everything feel manageable again.</p>
+      </div>
+      <div class="thing" data-num="04">
+        <span class="thing-icon">🍳</span>
+        <div class="thing-title">Food That Heals</div>
+        <p class="thing-desc">No restaurant will ever replicate it. You made meals feel like medicine and warmth.</p>
+      </div>
+      <div class="thing" data-num="05">
+        <span class="thing-icon">📖</span>
+        <div class="thing-title">The Best Advice</div>
+        <p class="thing-desc">Always given at exactly the right moment, even when we weren't ready to hear it.</p>
+      </div>
+      <div class="thing" data-num="06">
+        <span class="thing-icon">⭐</span>
+        <div class="thing-title">Believing First</div>
+        <p class="thing-desc">You believed in us before we knew what we were capable of. That changed everything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LETTER ══ -->
+<section class="letter-section">
+  <div class="letter-inner">
+    <div class="sec-label reveal" style="color:var(--moss)">A letter to you</div>
+    <div class="letter-paper reveal">
+      <div class="letter-lines"></div>
+      <div class="letter-date">May 10th, 2026</div>
+      <div class="letter-dear">Dear Mum,</div>
+      <div class="letter-body">
+        <p>There are things I carry with me every single day that came directly from you — a way of laughing too loud in quiet rooms, a habit of caring too deeply, a certainty that showing up for people is never the wrong choice.</p>
+        <br>
+        <p>I didn't always say it enough. <em>I'm saying it now.</em> You are the reason I know what love looks like in its most honest form — not the easy kind, but the kind that stays.</p>
+        <br>
+        <p>Every time I am kind to someone, it's because of what you showed me. Every time I keep going when things get hard, I hear your voice telling me I can. You live in all of that.</p>
+        <br>
+        <p>Today is yours. <em>Every good day, really, has been yours.</em> Thank you for everything you've poured into us — it didn't go anywhere. It became us.</p>
+      </div>
+      <div class="letter-sign">
+        With all my love 🌿
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WISHES TIMELINE ══ -->
+<section class="wishes-section">
+  <div class="wishes-inner">
+    <div class="sec-label reveal">My wishes for you</div>
+    <h2 class="sec-heading reveal">Everything you <em>deserve</em> this year</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-wish-title">Rest without guilt</div>
+        <p class="tl-wish-desc">You've spent a lifetime giving. May this year bring you mornings that are slow, quiet, and entirely your own.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-wish-title">Laughter that fills the room</div>
+        <p class="tl-wish-desc">The kind that makes your eyes water and everyone around you join in without knowing why.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-wish-title">Good health, always</div>
+        <p class="tl-wish-desc">Because we need you here, and you deserve to feel as strong and vibrant as your spirit.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-wish-title">Joy that is only yours</div>
+        <p class="tl-wish-desc">Not tied to us, not measured by what you've done for others — just pure, personal joy that belongs to you.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-wish-title">To know how loved you are</div>
+        <p class="tl-wish-desc">Not just today. Every single ordinary day — to feel it the way we feel everything you gave us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSING ══ -->
+<section class="closing">
+  <div class="closing-glow"></div>
+  <div class="petals-wrap" id="petalsWrap"></div>
+
+  <div class="reveal" style="position:relative;z-index:1;">
+    <p class="closing-pre">Always and forever —</p>
+    <h2 class="closing-main">We love you,<br><em>Mum.</em></h2>
+    <p class="closing-tagline">Happy Mother's Day · May 10, 2026</p>
+    <button class="btn" onclick="celebrate()">🌸 Celebrate!</button>
+  </div>
+</section>
+
+<script>
+// ── Cursor ──
+const c1 = document.getElementById('c1');
+const c2 = document.getElementById('c2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  c1.style.left=mx+'px'; c1.style.top=my+'px';
+});
+(function animC(){
+  rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+  c2.style.left=rx+'px'; c2.style.top=ry+'px';
+  requestAnimationFrame(animC);
+})();
+
+// ── Particle canvas ──
+const cvs = document.getElementById('canvas');
+const ctx = cvs.getContext('2d');
+cvs.width=innerWidth; cvs.height=innerHeight;
+addEventListener('resize',()=>{ cvs.width=innerWidth; cvs.height=innerHeight; });
+
+let pts=[];
+const colors=['#c4714a','#7a8c6e','#e8c4a8','#4a5c3f','#f5f0e8','#d4e0d0'];
+
+function addParticles(x,y,n=8){
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2;
+    const spd=2+Math.random()*5;
+    pts.push({
+      x,y,
+      vx:Math.cos(a)*spd,
+      vy:Math.sin(a)*spd - 2,
+      r:2+Math.random()*5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      life:1,
+      shape:Math.random()>.5?'circle':'leaf'
+    });
+  }
+}
+
+(function draw(){
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  pts=pts.filter(p=>p.life>0);
+  pts.forEach(p=>{
+    ctx.save();
+    ctx.globalAlpha=p.life*.9;
+    ctx.fillStyle=p.color;
+    ctx.translate(p.x,p.y);
+    ctx.rotate(p.life*10);
+    if(p.shape==='circle'){
+      ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.ellipse(0,0,p.r,p.r*2.2,0,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+    p.x+=p.vx; p.y+=p.vy;
+    p.vy+=.12; p.vx*=.98;
+    p.life-=.015;
+  });
+  requestAnimationFrame(draw);
+})();
+
+document.addEventListener('click',e=>addParticles(e.clientX,e.clientY));
+
+// ── Scroll reveal ──
+const allReveal = document.querySelectorAll('.reveal, .tl-item, .reveal-stagger');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+},{ threshold:.1 });
+allReveal.forEach(el=>obs.observe(el));
+
+// ── Celebrate button ──
+function celebrate(){
+  const wrap = document.getElementById('petalsWrap');
+  const emojis=['🌸','🌷','🌿','💐','🌹','✨','💕','🍃'];
+  for(let i=0;i<20;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      p.className='fpetal';
+      p.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      p.style.cssText=`left:${Math.random()*100}%;bottom:0;font-size:${16+Math.random()*18}px;animation-duration:${5+Math.random()*5}s;animation-delay:${Math.random()*2}s;`;
+      wrap.appendChild(p);
+      setTimeout(()=>p.remove(),10000);
+    },i*150);
+  }
+  for(let j=0;j<5;j++){
+    setTimeout(()=>addParticles(innerWidth/2, innerHeight-100, 12), j*200);
+  }
+}
+
+setTimeout(()=>{ for(let i=0;i<4;i++) setTimeout(()=>addParticles(Math.random()*innerWidth, -10, 5),i*400); },1600);
+</script>
+</body>
+</html>
