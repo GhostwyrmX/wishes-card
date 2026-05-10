@@ -19,16 +19,16 @@
         }
       ],
       "destination": "/mothers-day-2026/:path*"
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "your-custom-domain-2.com"
-        }
-      ],
-      "destination": "/mothers-day-2026/:path*"
     }
+    // {
+    //   "source": "/:path*",
+    //   "has": [
+    //     {
+    //       "type": "host",
+    //       "value": "your-custom-domain-2.com"
+    //     }
+    //   ],
+    //   "destination": "/mothers-day-2026/:path*"
+    // }
   ]
 }
