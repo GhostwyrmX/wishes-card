@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Father's Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0A1628;
+      --deep:   #1A2F52;
+      --gold:   #D4A843;
+      --gold-l: #E8C47A;
+      --cream:  #F5EDD6;
+      --rose:   #C9736B;
+      --text:   #2C1A0E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--deep) 45%, #2B4A7A 70%, #D4884A 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Soft sunrise glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 350px;
+      background: radial-gradient(ellipse, rgba(212,168,67,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s ease forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.1;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.55s ease forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-l);
+    }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+      color: rgba(245,237,214,0.75);
+      margin-top: 1.4rem;
+      max-width: 480px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.85s ease forwards;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.6s ease forwards;
+    }
+
+    .scroll-hint span {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,237,214,0.45);
+    }
+
+    .scroll-arrow {
+      width: 22px;
+      height: 22px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 1.6s infinite;
+    }
+
+    /* ── LETTER ── */
+    .letter-section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 6rem 2rem 5rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 2.8rem;
+    }
+
+    .letter-card {
+      background: white;
+      border-radius: 3px;
+      padding: 3.5rem 3rem;
+      box-shadow: 0 8px 40px rgba(10,22,40,0.09), 0 2px 8px rgba(10,22,40,0.05);
+      position: relative;
+      border-top: 4px solid var(--gold);
+    }
+
+    .letter-card::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 9rem;
+      color: var(--gold);
+      opacity: 0.12;
+      position: absolute;
+      top: -1.5rem;
+      left: 2rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .letter-date {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .letter-body {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #2C1A0E;
+      white-space: pre-wrap;
+      min-height: 280px;
+    }
+
+    #cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--gold);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blink 0.9s step-end infinite;
+    }
+
+    .letter-sign {
+      margin-top: 2.4rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--rose);
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+
+    /* ── PILLARS ── */
+    .pillars-section {
+      background: var(--navy);
+      padding: 5.5rem 2rem;
+      text-align: center;
+    }
+
+    .pillars-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+
+    .pillars-sub {
+      font-size: 0.95rem;
+      color: rgba(245,237,214,0.55);
+      margin-bottom: 3.5rem;
+      font-style: italic;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .pillar {
+      background: var(--deep);
+      border-radius: 4px;
+      padding: 2.4rem 1.8rem;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .pillar:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .pillar-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .pillar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--gold-l);
+      margin-bottom: 0.7rem;
+    }
+
+    .pillar-desc {
+      font-size: 0.9rem;
+      color: rgba(245,237,214,0.65);
+      line-height: 1.65;
+    }
+
+    /* ── MEMORY STRIP ── */
+    .memory-section {
+      padding: 5.5rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .memory-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      color: var(--navy);
+      margin-bottom: 3rem;
+    }
+
+    .memory-title em { color: var(--rose); font-style: italic; }
+
+    .memories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .memory-tag {
+      background: var(--navy);
+      color: var(--cream);
+      padding: 0.65rem 1.3rem;
+      border-radius: 100px;
+      font-size: 0.88rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      transition: background 0.25s, color 0.25s;
+      cursor: default;
+    }
+
+    .memory-tag:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── FOOTER TRIBUTE ── */
+    .footer-tribute {
+      background: linear-gradient(135deg, var(--deep) 0%, var(--navy) 100%);
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      position: relative;
+    }
+
+    .big-love {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .footer-line {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,237,214,0.4);
+      margin-top: 2.2rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ── STRONGHOLD CRUSADER ── */
+    .crusader-section {
+      background: linear-gradient(170deg, #1C1206 0%, #2E1A08 40%, #1A2F52 100%);
+      padding: 5.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Desert sand texture overlay */
+    .crusader-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A843' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .crusader-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C8A060;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .crusader-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      color: var(--gold-l);
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .crusader-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(245,237,214,0.5);
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .crusader-scene {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Pixel-art style castle drawn in CSS */
+    .castle-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      font-size: 3.2rem;
+      letter-spacing: -0.05em;
+      filter: drop-shadow(0 4px 18px rgba(212,168,67,0.3));
+      position: relative;
+      z-index: 1;
+    }
+
+    .crusader-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: rgba(245,237,214,0.8);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .crusader-quote strong { color: var(--gold-l); font-style: normal; }
+
+    .crusader-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .crusader-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(212,168,67,0.2);
+      border-radius: 4px;
+      padding: 1.6rem 1.4rem;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .crusader-card:hover {
+      background: rgba(212,168,67,0.08);
+      border-color: rgba(212,168,67,0.5);
+      transform: translateY(-3px);
+    }
+
+    .crusader-card-icon { font-size: 1.9rem; margin-bottom: 0.7rem; }
+
+    .crusader-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--gold-l);
+      margin-bottom: 0.4rem;
+    }
+
+    .crusader-card-text {
+      font-size: 0.82rem;
+      color: rgba(245,237,214,0.55);
+      line-height: 1.6;
+    }
+
+    /* ── CELEBRATE BUTTON ── */
+    .celebrate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 44px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    .celebrate-btn:hover {
+      background: var(--gold-l);
+      transform: scale(1.04);
+      box-shadow: 0 12px 36px rgba(212,168,67,0.35);
+    }
+
+    .celebrate-btn:active { transform: scale(0.96); }
+
+    /* Rising emoji petals */
+    .petals-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .fpetal {
+      position: absolute;
+      animation: risePetal linear forwards;
+      opacity: 0;
+    }
+
+    @keyframes risePetal {
+      0%   { transform: translateY(60px) rotate(0deg);    opacity: 0; }
+      15%  { opacity: 0.85; }
+      85%  { opacity: 0.6; }
+      100% { transform: translateY(-90vh) rotate(560deg); opacity: 0; }
+    }
+
+    /* Particle canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @media (max-width: 600px) {
+      .letter-card { padding: 2.4rem 1.6rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .hero-eyebrow, .hero-title, .hero-sub, .scroll-hint { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">June 21, 2026 &nbsp;·&nbsp; Father's Day</p>
+    <h1 class="hero-title">Happy<br><em>Father's Day,</em><br>Papa</h1>
+    <p class="hero-sub">For every lesson you never stopped teaching, and every sacrifice you never mentioned.</p>
+    <div class="scroll-hint">
+      <span>Read on</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section class="letter-section">
+    <p class="section-label">A letter from the heart</p>
+    <div class="letter-card">
+      <p class="letter-date">June 21, 2026</p>
+      <div class="letter-body" id="letterText"></div><span id="cursor"></span>
+      <p class="letter-sign" id="letterSign">— With all my love, Your child 💛</p>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars-section">
+    <h2 class="pillars-title">What you gave me</h2>
+    <p class="pillars-sub">Things no one else could have.</p>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon">🧭</div>
+        <p class="pillar-name">Direction</p>
+        <p class="pillar-desc">You showed me which way to walk, even when the road wasn't clear to either of us.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🛡️</div>
+        <p class="pillar-name">Safety</p>
+        <p class="pillar-desc">Knowing you were there made every risk feel smaller and every fear feel manageable.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📖</div>
+        <p class="pillar-name">Wisdom</p>
+        <p class="pillar-desc">Not from books — from life. The kind of wisdom that only comes from someone who's been through it.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">💪</div>
+        <p class="pillar-name">Strength</p>
+        <p class="pillar-desc">You taught me that strength isn't about never falling — it's about always getting back up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORIES -->
+  <section class="memory-section">
+    <h2 class="memory-title">Little things I <em>never</em> forget</h2>
+    <div class="memories">
+      <span class="memory-tag">Your advice before every big decision</span>
+      <span class="memory-tag">The way you worry but never say it</span>
+      <span class="memory-tag">Sunday mornings with chai</span>
+      <span class="memory-tag">Every time you dropped everything for me</span>
+      <span class="memory-tag">Your proud smile</span>
+      <span class="memory-tag">How hard you work, quietly</span>
+      <span class="memory-tag">Late-night conversations</span>
+      <span class="memory-tag">Your sense of humour</span>
+      <span class="memory-tag">Being my biggest supporter</span>
+    </div>
+  </section>
+
+  <!-- STRONGHOLD CRUSADER -->
+  <section class="crusader-section">
+    <p class="crusader-eyebrow">A Childhood Legend</p>
+    <h2 class="crusader-title">⚔️ Stronghold Crusader</h2>
+    <p class="crusader-sub">The game that was more than a game.</p>
+
+    <div class="crusader-scene">
+      <div class="castle-wrap">
+        <span>🏰</span><span>🗼</span><span>🏯</span><span>🗼</span><span>🏰</span>
+      </div>
+      <p class="crusader-quote">
+        Remember when we'd huddle around the screen, placing archers on the walls,
+        setting up oil pots, and defending the keep together?
+        <strong>Those sessions were some of the best hours we ever spent.</strong>
+        Not just playing a game — building something, side by side, as a team.
+      </p>
+    </div>
+
+    <div class="crusader-cards">
+      <div class="crusader-card">
+        <div class="crusader-card-icon">🏹</div>
+        <p class="crusader-card-title">Archers on the Wall</p>
+        <p class="crusader-card-text">You always knew exactly where to place them. We never argued about that.</p>
+      </div>
+      <div class="crusader-card">
+        <div class="crusader-card-icon">🔥</div>
+        <p class="crusader-card-title">The Oil Trap</p>
+        <p class="crusader-card-text">Setting fire to the moat just as the enemy charged — peak satisfaction, every time.</p>
+      </div>
+      <div class="crusader-card">
+        <div class="crusader-card-icon">⚔️</div>
+        <p class="crusader-card-title">Holding the Keep</p>
+        <p class="crusader-card-text">Even when the odds were terrible, we held on. Just like you've always held this family together.</p>
+      </div>
+      <div class="crusader-card">
+        <div class="crusader-card-icon">👑</div>
+        <p class="crusader-card-title">The Lord's Approval</p>
+        <p class="crusader-card-text">Your approval meant everything back then. Still does, honestly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CELEBRATE + FOOTER MERGED -->
+  <footer class="footer-tribute" style="padding: 5rem 2rem 4rem; position:relative; overflow:hidden;">
+    <div class="petals-wrap" id="petalsWrap"></div>
+    <p class="big-love" style="position:relative;z-index:1;">You're my hero.</p>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; color:rgba(245,237,214,0.7); font-size:1.1rem; margin-top:0.8rem; margin-bottom:0.5rem; position:relative;z-index:1;">
+      Thank you for everything you are, and everything you've done.
+    </p>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; color:rgba(201,115,107,0.9); font-size:1.05rem; margin-bottom:2.8rem; position:relative;z-index:1;">
+      Happy Father's Day! We love you more than words can say. 💛
+    </p>
+    <button class="celebrate-btn" id="celebrateBtn" style="position:relative;z-index:1;">
+      🎉 Celebrate Papa!
+    </button>
+    <p class="footer-line" style="margin-top:3rem; position:relative;z-index:1;">Happy Father's Day &nbsp;·&nbsp; 2026</p>
+  </footer>
+
+  <script>
+    const fullText =
+`Dear Papa,
+
+There aren't many people in this world who have shaped who I am as deeply as you have. Every piece of advice you've given me, every time you quietly handled things so I wouldn't have to worry — I see all of it, even when I don't say it out loud.
+
+You've never needed the spotlight. You just showed up — for every important moment, for every ordinary Tuesday. That reliability, that steadiness, is something I hope to carry forward in my own life.
+
+I know I don't always say thank you the way I should. So today, I want you to know: I am proud to be your child. I am grateful for your patience. I am in awe of how much you love this family.
+
+On this Father's Day, I just want you to sit back and feel how much you are loved — by me, completely and without condition.`;
+
+    const letterEl = document.getElementById('letterText');
+    const cursor   = document.getElementById('cursor');
+    const signEl   = document.getElementById('letterSign');
+    let i = 0;
+
+    function typeNext() {
+      if (i < fullText.length) {
+        letterEl.textContent += fullText[i++];
+        setTimeout(typeNext, i < 10 ? 30 : 22);
+      } else {
+        cursor.style.display = 'none';
+        signEl.style.opacity = '1';
+      }
+    }
+
+    // Start typing after hero animations settle
+    setTimeout(typeNext, 1800);
+
+    // ── PARTICLE CANVAS (click trail) ──
+    const cvs = document.getElementById('confetti-canvas');
+    const ctx2 = cvs.getContext('2d');
+    cvs.width = innerWidth; cvs.height = innerHeight;
+    addEventListener('resize', () => { cvs.width = innerWidth; cvs.height = innerHeight; });
+
+    let pts = [];
+    const pColors = ['#D4A843','#E8C47A','#C9736B','#F5EDD6','#1A2F52','#FFFFFF'];
+
+    function addParticles(x, y, n = 10) {
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2;
+        const spd = 2 + Math.random() * 6;
+        pts.push({
+          x, y,
+          vx: Math.cos(a) * spd,
+          vy: Math.sin(a) * spd - 2,
+          r: 3 + Math.random() * 5,
+          color: pColors[Math.floor(Math.random() * pColors.length)],
+          life: 1,
+          shape: Math.random() > 0.5 ? 'circle' : 'rect'
+        });
+      }
+    }
+
+    (function drawParticles() {
+      ctx2.clearRect(0, 0, cvs.width, cvs.height);
+      pts = pts.filter(p => p.life > 0);
+      pts.forEach(p => {
+        ctx2.save();
+        ctx2.globalAlpha = p.life * 0.9;
+        ctx2.fillStyle = p.color;
+        ctx2.translate(p.x, p.y);
+        ctx2.rotate(p.life * 8);
+        if (p.shape === 'circle') {
+          ctx2.beginPath(); ctx2.arc(0, 0, p.r, 0, Math.PI * 2); ctx2.fill();
+        } else {
+          ctx2.fillRect(-p.r / 2, -p.r, p.r, p.r * 2);
+        }
+        ctx2.restore();
+        p.x += p.vx; p.y += p.vy;
+        p.vy += 0.14; p.vx *= 0.98;
+        p.life -= 0.016;
+      });
+      requestAnimationFrame(drawParticles);
+    })();
+
+    // ── CELEBRATE / RISING PETALS ──
+    document.getElementById('celebrateBtn').addEventListener('click', celebrate);
+
+    function celebrate() {
+      const wrap = document.getElementById('petalsWrap');
+      const emojis = ['⚔️','🛡️','👑','🏰','🎖️','⭐','💛','🎉','🏆','✨','💪','🎊'];
+      for (let i = 0; i < 22; i++) {
+        setTimeout(() => {
+          const p = document.createElement('div');
+          p.className = 'fpetal';
+          p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          const dur = 5 + Math.random() * 5;
+          p.style.cssText = `left:${Math.random()*100}%;bottom:0;font-size:${16+Math.random()*20}px;animation-duration:${dur}s;animation-delay:${Math.random()*1.5}s;`;
+          wrap.appendChild(p);
+          setTimeout(() => p.remove(), (dur + 2) * 1000);
+        }, i * 120);
+      }
+      // Particle burst from button center
+      for (let j = 0; j < 5; j++) {
+        setTimeout(() => addParticles(innerWidth / 2, innerHeight - 120, 14), j * 180);
+      }
+    }
+  </script>
+</body>
+</html>
