@@ -1,44 +1,65 @@
 {
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "birthday-riya.vercel.app"
-        }
-      ],
-      "destination": "/riya-birthday-2026/index.html"
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "birthday-riya.vercel.app"
-        }
-      ],
-      "destination": "/riya-birthday-2026/:path*"
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "mother-day-wish.vercel.app"
-        }
-      ],
-      "destination": "/mothers-day-2026/index.html"
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "mother-day-wish.vercel.app"
-        }
-      ],
-      "destination": "/mothers-day-2026/:path*"
-    }
-  ]
+"rewrites": [
+{
+"source": "/",
+"has": [
+{
+"type": "host",
+"value": "birthday-riya.vercel.app"
 }
+ ],
+"destination": "/riya-birthday-2026/index.html"
+},
+{
+"source": "/:path*",
+"has": [
+{
+"type": "host",
+"value": "birthday-riya.vercel.app"
+}
+ ],
+"destination": "/riya-birthday-2026/:path*"
+},
+{
+"source": "/",
+"has": [
+{
+"type": "host",
+"value": "mother-day-wish.vercel.app"
+}
+ ],
+"destination": "/mothers-day-2026/index.html"
+},
+{
+"source": "/:path*",
+"has": [
+{
+"type": "host",
+"value": "mother-day-wish.vercel.app"
+}
+ ],
+"destination": "/mothers-day-2026/:path*"
+},
+{
+"source": "/",
+"has": [
+{
+"type": "host",
+"value": "father-day-wish.vercel.app"
+}
+ ],
+"destination": "/index.html"
+},
+{
+"source": "/:path*",
+"has": [
+{
+"type": "host",
+"value": "father-day-wish.vercel.app"
+}
+ ],
+"destination": "/:path*"
+}
+]
+}
+
